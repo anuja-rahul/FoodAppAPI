@@ -1,0 +1,11 @@
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\bin\Debug\net9.0\FoodApp.Contracts.deps.json
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\bin\Debug\net9.0\FoodApp.Contracts.dll
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\bin\Debug\net9.0\FoodApp.Contracts.pdb
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.AssemblyInfoInputs.cache
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.AssemblyInfo.cs
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.csproj.CoreCompileInputs.cache
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.dll
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\refint\FoodApp.Contracts.dll
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.pdb
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\ref\FoodApp.Contracts.dll
