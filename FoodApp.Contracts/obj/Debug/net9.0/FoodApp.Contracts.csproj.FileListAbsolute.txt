@@ -9,3 +9,4 @@ D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contrac
 D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\refint\FoodApp.Contracts.dll
 D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.pdb
 D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\ref\FoodApp.Contracts.dll
+D:\Data\6.Other\10.C#\FoodApp\FoodApp.Contracts\obj\Debug\net9.0\FoodApp.Contracts.sourcelink.json

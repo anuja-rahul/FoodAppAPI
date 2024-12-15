@@ -33,3 +33,4 @@ D:\Data\6.Other\10.C#\FoodApp\FoodApp\obj\Debug\net9.0\refint\FoodApp.dll
 D:\Data\6.Other\10.C#\FoodApp\FoodApp\obj\Debug\net9.0\FoodApp.pdb
 D:\Data\6.Other\10.C#\FoodApp\FoodApp\obj\Debug\net9.0\FoodApp.genruntimeconfig.cache
 D:\Data\6.Other\10.C#\FoodApp\FoodApp\obj\Debug\net9.0\ref\FoodApp.dll
+D:\Data\6.Other\10.C#\FoodApp\FoodApp\obj\Debug\net9.0\FoodApp.sourcelink.json
