@@ -24,23 +24,12 @@ public class BreakfastController(IBreakfastService breakfastService) : ApiContro
             request.Sweet
         );
 
-        _breakfastService.Createbreakfast(breakfast);
+        ErrorOr<Created> createdBreakfastResult = _breakfastService.Createbreakfast(breakfast);
 
-        var response = new Breakfastresponse(
-            breakfast.Id,
-            breakfast.Name,
-            breakfast.Description,
-            breakfast.StartDateTime,
-            breakfast.EndDateTime,
-            breakfast.LastModifiedDate,
-            breakfast.Savory,
-            breakfast.Sweet
+        return createdBreakfastResult.Match(
+            created => CreatedAtGetBreakfast(breakfast),
+            Problem
         );
-
-        return CreatedAtAction(
-            actionName: nameof(GetBreakfast),
-            routeValues: new {id = breakfast.Id} ,
-            value: response);
     }
 
     [HttpGet("{id:guid}")]
@@ -62,6 +51,36 @@ public class BreakfastController(IBreakfastService breakfastService) : ApiContro
         // return Ok(response);
     }
 
+    [HttpPut("{id:guid}")]
+    public IActionResult UpsertBreakfast(Guid id, UpsertBreakfastRequest request) {
+        var breakfast = new Breakfast(
+            id,
+            request.Name,
+            request.Description,
+            request.StartDateTime,
+            request.EndDateTime,
+            DateTime.UtcNow,
+            request.Savory,
+            request.Sweet
+        );
+        ErrorOr<UpsertedBreakfast> upsertedBreakfastResult = _breakfastService.UpsertBreakfast(breakfast);
+
+        // TODO: return 201 if new breakfast is created
+        return upsertedBreakfastResult.Match(
+            upserted => upserted.IsNewlyCreated ? CreatedAtGetBreakfast(breakfast) : NoContent(),
+            Problem
+        );
+    }
+
+    [HttpDelete("{id:guid}")]
+    public IActionResult DeleteBreakfast(Guid id) {
+        ErrorOr<Deleted> deleteBreakfastResult = _breakfastService.DeleteBreakfast(id);
+        return deleteBreakfastResult.Match(
+            deleted => NoContent(),
+            Problem
+        );
+    }
+
     private static Breakfastresponse MapBreakfastResponse(Breakfast breakfast) {
         return new Breakfastresponse(
             breakfast.Id,
@@ -75,28 +94,12 @@ public class BreakfastController(IBreakfastService breakfastService) : ApiContro
         );
     }
 
-    [HttpPut("{id:guid}")]
-    public IActionResult UpsertBreakfast(Guid id, UpsertBreakfastRequest request) {
-        var breakfast = new Breakfast(
-            id,
-            request.Name,
-            request.Description,
-            request.StartDateTime,
-            request.EndDateTime,
-            DateTime.UtcNow,
-            request.Savory,
-            request.Sweet
+    private CreatedAtActionResult CreatedAtGetBreakfast(Breakfast breakfast) {
+        return CreatedAtAction(
+            actionName: nameof(GetBreakfast),
+            routeValues: new { id = breakfast.Id},
+            value: MapBreakfastResponse(breakfast)
         );
-        _breakfastService.UpsertBreakfast(breakfast);
-
-        // TODO: return 201 if new breakfast is created
-        return NoContent();
-    }
-
-    [HttpDelete("{id:guid}")]
-    public IActionResult DeleteBreakfast(Guid id) {
-        _breakfastService.DeleteBreakfast(id);
-        return NoContent();
     }
 }
 
