@@ -7,9 +7,7 @@ using FoodApp.ServiceErrors;
 
 namespace FoodApp.Controllers;
 
-[ApiController]
-[Route("breakfasts/")]
-public class BreakfastController(IBreakfastService breakfastService) : ControllerBase {
+public class BreakfastController(IBreakfastService breakfastService) : ApiController {
     private readonly IBreakfastService _breakfastService = breakfastService;
 
     [HttpPost]
@@ -49,12 +47,23 @@ public class BreakfastController(IBreakfastService breakfastService) : Controlle
     public IActionResult GetBreakfast(Guid id) {
         Console.WriteLine(id);
         ErrorOr<Breakfast> getBreakfastResult = _breakfastService.GetBreakfast(id);
-        if (getBreakfastResult.IsError && getBreakfastResult.FirstError == Errors.Breakfast.NotFound) {
-            return NotFound();
-        }
 
-        var breakfast = getBreakfastResult.Value;
-        var response = new Breakfastresponse(
+        return getBreakfastResult.Match(
+            breakfast => Ok(MapBreakfastResponse(breakfast)),
+            Problem
+        );
+
+        // if (getBreakfastResult.IsError && getBreakfastResult.FirstError == Errors.Breakfast.NotFound) {
+        //     return NotFound();
+        // }
+
+        // var breakfast = getBreakfastResult.Value;
+        // Breakfastresponse response = MapBreakfastResponse(breakfast);
+        // return Ok(response);
+    }
+
+    private static Breakfastresponse MapBreakfastResponse(Breakfast breakfast) {
+        return new Breakfastresponse(
             breakfast.Id,
             breakfast.Name,
             breakfast.Description,
@@ -64,7 +73,6 @@ public class BreakfastController(IBreakfastService breakfastService) : Controlle
             breakfast.Savory,
             breakfast.Sweet
         );
-        return Ok(response);
     }
 
     [HttpPut("{id:guid}")]
