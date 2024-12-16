@@ -2,6 +2,8 @@ using FoodApp.Contracts.Breakfast;
 using Microsoft.AspNetCore.Mvc;
 using FoodApp.Models;
 using FoodApp.Services.Breakfasts;
+using ErrorOr;
+using FoodApp.ServiceErrors;
 
 namespace FoodApp.Controllers;
 
@@ -46,7 +48,12 @@ public class BreakfastController(IBreakfastService breakfastService) : Controlle
     [HttpGet("{id:guid}")]
     public IActionResult GetBreakfast(Guid id) {
         Console.WriteLine(id);
-        Breakfast breakfast = _breakfastService.Getbreakfast(id);
+        ErrorOr<Breakfast> getBreakfastResult = _breakfastService.GetBreakfast(id);
+        if (getBreakfastResult.IsError && getBreakfastResult.FirstError == Errors.Breakfast.NotFound) {
+            return NotFound();
+        }
+
+        var breakfast = getBreakfastResult.Value;
         var response = new Breakfastresponse(
             breakfast.Id,
             breakfast.Name,
