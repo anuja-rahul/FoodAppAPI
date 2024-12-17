@@ -13,14 +13,7 @@ public class BreakfastController(IBreakfastService breakfastService) : ApiContro
     [HttpPost]
     public IActionResult CreateBreakfast(CreateBreakfastRequest request) {
 
-        ErrorOr<Breakfast> requestToBreakfastResult = Breakfast.Create(
-            request.Name,
-            request.Description,
-            request.StartDateTime,
-            request.EndDateTime,
-            request.Savory,
-            request.Sweet
-        );
+        ErrorOr<Breakfast> requestToBreakfastResult = Breakfast.From(request);
 
         if (requestToBreakfastResult.IsError) {
             return Problem(requestToBreakfastResult.Errors);
@@ -44,27 +37,11 @@ public class BreakfastController(IBreakfastService breakfastService) : ApiContro
             breakfast => Ok(MapBreakfastResponse(breakfast)),
             Problem
         );
-
-        // if (getBreakfastResult.IsError && getBreakfastResult.FirstError == Errors.Breakfast.NotFound) {
-        //     return NotFound();
-        // }
-
-        // var breakfast = getBreakfastResult.Value;
-        // Breakfastresponse response = MapBreakfastResponse(breakfast);
-        // return Ok(response);
     }
 
     [HttpPut("{id:guid}")]
     public IActionResult UpsertBreakfast(Guid id, UpsertBreakfastRequest request) {
-        ErrorOr<Breakfast> requestTobreakfastresult = Breakfast.Create(
-            request.Name,
-            request.Description,
-            request.StartDateTime,
-            request.EndDateTime,
-            request.Savory,
-            request.Sweet,
-            id
-        );
+        ErrorOr<Breakfast> requestTobreakfastresult = Breakfast.From(id, request);
 
         if (requestTobreakfastresult.IsError) {
             return Problem(requestTobreakfastresult.Errors);
